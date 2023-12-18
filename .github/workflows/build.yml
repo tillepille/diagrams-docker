@@ -17,7 +17,7 @@ jobs:
       run: |
         docker buildx create --use
         docker buildx inspect --bootstrap
-        docker buildx build --platform linux/amd64,linux/arm64 -t tillepille/diagrams::latest .
+        docker buildx build --platform linux/amd64,linux/arm64 -t tillepille/diagrams:latest .
 
     - name: Push Docker image
       if: github.ref == 'refs/heads/main'
@@ -25,7 +25,7 @@ jobs:
         echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
         docker buildx create --use
         docker buildx inspect --bootstrap
-        docker buildx build --platform linux/amd64,linux/arm64 -t tillepille/diagrams::latest --push .
+        docker buildx build --platform linux/amd64,linux/arm64 -t tillepille/diagrams:latest --push .
       env:
         DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
         DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
